@@ -25,6 +25,9 @@ df_98<- read.table("speedProfile_p98.csv", sep="\t", header=T)
 df_105<- read.table("speedProfile_p105.csv", sep="\t", header=T)
 df_112<- read.table("speedProfile_p112.csv", sep="\t", header=T)
 df_112_237<- read.table("speedProfile_p112_237.csv", sep="\t", header=T)
+df_56_19E_62_66<- read.table("speedProfile_p56_19E_62_66.csv", sep="\t", header=T)
+df_91_44<- read.table("speedProfile_p91_44.csv", sep="\t", header=T)
+
 df_49$time_point <- 49
 df_56$time_point <- 56
 df_63$time_point <- 63
@@ -36,6 +39,8 @@ df_98$time_point <- 98
 df_105$time_point <- 105
 df_112$time_point <- 112
 df_112_237$time_point <- 112 #mouse #237 analyzed after rest of p112
+df_56_19E_62_66$time_point <- 56 #mice analyzed after rest of p56
+df_91_44$time_point <- 91 #mice analyzed after rest of p91
 
 #correcting cadence and stride, as video clip was slowed down for p112 #237
 #Cadence
@@ -51,7 +56,7 @@ df_112_237$fLStride <- df_112_237$fLStride /5
 df_112_237$fRStride <- df_112_237$fRStride/5
 
 #Bind all timepoint dataframes together
-df <- rbind(df_49,df_56, df_63, df_70, df_77, df_84, df_91, df_98, df_105, df_112, df_112_237)
+df <- rbind(df_49,df_56, df_63, df_70, df_77, df_84, df_91, df_98, df_105, df_112, df_112_237, df_56_19E_62_66, df_91_44)
 
 ```
 
