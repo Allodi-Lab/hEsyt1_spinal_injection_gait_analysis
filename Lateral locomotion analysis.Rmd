@@ -16,7 +16,9 @@ library(pacman)
 p_load(tidyverse, ggsignif, multcomp, broom, emmeans, DescTools)
 setwd("~/Documents/ESYT1_spinal_locomotion_analysis/Lateral video analysis/") #Change the path to where you have the 'Timepoint analysis' map located
 df<- read.table("Statistics_lateral_updated.csv", sep="\t", header=T)
-#df <- read_csv("stats_updated.csv")
+df_19E<- read.table("statistics_p56_p63_19E.csv", sep="\t", header=T) #change 'belt speed' to belt.speed
+
+df <- rbind(df, df_19E)
 
 ```
 
@@ -129,6 +131,12 @@ df2$mouse_number <- ifelse(grepl('_5_', df$name), '5', df2$mouse_number)
 df2$mouse_number <- ifelse(grepl('_46_', df$name), '46', df2$mouse_number)
 ```
 
+Removal of mouse 1, 7 and 80 from dataset as they were injected at different timepoints than the other mice.
+```{r}
+df2$mouse_number<- as.numeric(df2$mouse_number) #Change mouse number from class character to class numeric
+df2<-df2[!(df2$mouse_number==80 | df2$mouse_number==1 | df2$mouse_number == 7),] 
+
+```
 Compute mean for each mouse for each timepoint
 
 ```{r}
@@ -291,8 +299,6 @@ DunnettTest(x=p112_all$knee_ang, g=p112_all$Genotype)
 anova_hip_1way <- aov(hip_ang ~ Genotype, data = p112_all)
 summary(anova_hip_1way)
 DunnettTest(x=p112_all$hip_ang, g=p112_all$Genotype)
-
-format(2.5e-05 ,scientific = FALSE)
 
 ```
 
